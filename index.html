@@ -8,32 +8,42 @@
 </head>
 <body>
 
-    <!-- <h3>Genrate a random number between 0 (inclusinve) and 1 (exclusinve)</h3>
-    <p id="result"></p>
-    <script>
-       var random = Math.random();
-       document.getElementById("result").innerHTML = random;
-    </script> -->
+    <!-- <section class="star-wars">
 
-    <!-- <h3>Genrate 10 random numbers between 0 (inclusinve) and 1 (exclusinve)</h3>
-    <p id="result"></p>
-    <script>
-       for(var i =0; i < 10; i++){
-          var random = Math.random();
-          document.getElementById("result").innerHTML += random + "<br>";
-       }
-    </script>   -->
+        <div class="crawl">
+          
+          <div class="title">
+            <p>Episode IV</p>
+            <h1>A New Hope</h1>
+          </div>
+          
+          <p>It is a period of civil war. Rebel spaceships, striking from a hidden base, have won their first victory against the evil Galactic Empire.</p>     
+          <p>During the battle, Rebel spies managed to steal secret plans to the Empire’s ultimate weapon, the DEATH STAR, an armored space station with enough power to destroy an entire planet.</p>
+          <p>Pursued by the Empire’s sinister agents, Princess Leia races home aboard her starship, custodian of the stolen plans that can save her people and restore freedom to the galaxy…</p>
+      
+        </div>
+      
+      </section> -->
 
-    <!-- <h3>Genrate a random number between 20 and 50</h3>
-    <p id="result"></p>
-    <script>
-       var min = .6;
-       var max = .8
-       var random = Math.random() * (max - min) + min;
-       document.getElementById("result").innerHTML += random ;
-    </script> -->
+    <div class="container">
+        <div id="alien-el">
+            <p id="alien-name">Alien</p>
+            <p id="alien-status-el"></p>
+            <!-- <p id="alien-message-el"></p> -->
+            <div class="floating"><img src="imgs/alien.png"  id="alien-img"></div>
+        </div>
+        <p id="message-el"></p>
+        <div id="human-el">
+            <p id="human-name">Human</p>
+            <p id="human-status-el"></p>
+            <!-- <p id="human-message-el"></p> -->
+            <!-- <img src="imgs/human.png" id="human-img"> -->
+        </div>
+        <button id="attack">Attack</button>
+        <button id="retreat">Retreat</button>
+        <button id="reset">Reset</button>
+    </div>
 
-
-    <script src="script.js"></script>
+    <script src="script-v4.js"></script>
 </body>
 </html>

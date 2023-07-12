@@ -12,17 +12,20 @@ class Ship {
             // console.log(this);
             console.log(defendant);
             // console.log("Ship: " + human.ship + " Hull: " + human.hull + " | " + defendant.ship + " Hull: " + defendant.hull);
-            console.log(`${this.ship} launches an attack on the ${defendant.ship}`);
+            console.log(`${this.ship} shots at the ${defendant.ship}`);
+            messageEl.innerHTML += `${this.ship} takes a shot at the ${defendant.ship}\r\n\n`;
+
             let currentShip = document.getElementById('alien-img');
             if (Math.random() < this.accuracy) {
                 console.log(`${defendant.ship} has been hit!`);
+                messageEl.innerHTML += `${defendant.ship} has been hit!\r\n\n`;
                 currentShip.setAttribute('src', 'imgs/alien-damage.png');
                 // console.log("Before: " + defendant.hull);
                 defendant.hull -= this.firepower;
                 // console.log("After: " + defendant.hull);
             } else {
                 console.log(`${this.ship} MISSES the ${defendant.ship}!`);
-                document.getElementById('message-el').textContent = `${this.ship} Misses the shot!!!`;
+                messageEl.innerHTML += `${this.ship} Misses the shot!!!\r\n\n`;
                 if (defendant.ship === 'Alien') {
                     console.log('where: ' + direction);
                     if (direction === 'left') {
@@ -39,6 +42,8 @@ class Ship {
                         setTimeout(function() {currentShip.setAttribute('src', 'imgs/alien-damage.png')}, 500);
                     } else {
                         setTimeout(function() {currentShip.setAttribute('src', 'imgs/alien-finger.png')}, 500);
+                        console.log(`The ${defendant.ship} seems to be taunting us!\r\n\n`);
+                        messageEl.innerHTML += `The ${defendant.ship} seems to be taunting us!\r\n\n`;
                     }
                 }
             }
@@ -60,7 +65,7 @@ class Ship {
                 }
                 
 
-                document.getElementById('message-el').innerHTML = `The ${defendant.ship} was destroyed!`;
+                messageEl.innerHTML += `The ${defendant.ship} was destroyed! Would you like to Continue or Retreat?\r\n\n`;
                 alienShips--;
                 console.log(`The ${defendant.ship} ship has been destroyed! Would you like to Continue or Retreat?`);
                 
@@ -73,34 +78,34 @@ class Ship {
 
     retreat() {
         console.log('Im getting outta here!')
-        document.getElementById('message-el').textContent = "I'm OUTTA HERE!";
+        messageEl.textContent += "I'm OUTTA HERE!\r\n\n";
     }
 
-    deploy(species) {
-        if (species === 'human') {
-            if (humanShips > 0) {
-                // console.log(ussAssembly);
-                const human = new Ship('USS Assembly', 20, 5, .7);
-                humanShips--;
-            }
-        } else {
-            if (alienShips > 0) {
-                // find a random number between 6 and 3
-                let hull = Math.floor(Math.random()*(6-3)+3) + 1;
+    // deploy(species) {
+    //     if (species === 'human') {
+    //         if (humanShips > 0) {
+    //             // console.log(ussAssembly);
+    //             const human = new Ship('USS Assembly', 20, 5, .7);
+    //             humanShips--;
+    //         }
+    //     } else {
+    //         if (alienShips > 0) {
+    //             // find a random number between 6 and 3
+    //             let hull = Math.floor(Math.random()*(6-3)+3) + 1;
 
-                // find a random number bewteen 4 and 2
-                let firepower = Math.floor(Math.random()*(4-2) + 2) + 1;
+    //             // find a random number bewteen 4 and 2
+    //             let firepower = Math.floor(Math.random()*(4-2) + 2) + 1;
 
-                // find a random number between .8 and .6
-                let attack = Math.random()*(.8-.6) + .6;
+    //             // find a random number between .8 and .6
+    //             let attack = Math.random()*(.8-.6) + .6;
 
-                // console.log(alienShip);
-                const alien = new Ship('Alien', hull, firepower, attack);
-                alienShips--;
-            }
+    //             // console.log(alienShip);
+    //             const alien = new Ship('Alien', hull, firepower, attack);
+    //             alienShips--;
+    //         }
 
-        }
-    }
+    //     }
+    // }
     
 }
 
@@ -133,6 +138,14 @@ console.log(`${alien.ship} - Hull: ${alien.hull}, Firepower: ${alien.firepower},
 
 document.getElementById('human-status-el').textContent = `Ships: ${humanShips} | ${human.ship} Hull: ${human.hull}`;
 document.getElementById('alien-status-el').textContent = `Ships: ${alienShips} | ${alien.ship} Hull: ${alien.hull}`;
+
+console.log(`${human.ship} initiates a FIRST STRIKE response and launches an attack on the ${alien.ship}`);
+console.log(`**** NEWS ALERT *****\nThe humans all around the world are being drained of our natural resources, our RAMEN!\n${human.ship} initiates a FIRST STRIKE response and launches an attack on the ${alien.ship} ship\r\n\n`);
+
+let messageEl = document.getElementById('message-el');
+messageEl.innerHTML += `<br>**** NEWS ALERT *****<br><img id='img-console' src='imgs/alien-ramen.png'><br>**** NEWS ALERT *****<br><br>The humans all around the world are being drained of our natural resources, our RAMEN!<br><br>${human.ship} initiates a FIRST STRIKE response and launches an attack on the ${alien.ship} ship\r\n\n`;
+
+
 
 // const imgEl = document.createElement('img');
 

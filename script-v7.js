@@ -1,14 +1,21 @@
 console.log('*** Space Battle Game ***');
 
 class Ship {
-    constructor(ship, hull, firepower, accuracy) {
+    constructor(ship, hull, firepower, accuracy, numShips) {
         this.ship = ship;
         this.hull = hull;
         this.firepower = firepower;
-        this.accuracy = accuracy
+        this.accuracy = accuracy;
+        this.numShips = numShips
     }
 
     attack(defendant) {
+
+        // if (this.numShips > 0) {
+
+        // } else {
+        //     messageEl.innerHTML += `${defendant.ship} has been hit! ${defendant.ship} hull strength is at ${defendant.hull}\r\n\n`;
+        // }
             console.log(this);
             console.log(defendant);
             // console.log("Ship: " + human.ship + " Hull: " + human.hull + " | " + defendant.ship + " Hull: " + defendant.hull);
@@ -17,9 +24,13 @@ class Ship {
 
             let currentShip = document.getElementById('alien-img');
             if (Math.random() < this.accuracy) {
-                console.log(`${defendant.ship} has been hit!`);
-                messageEl.innerHTML += `${defendant.ship} has been hit!\r\n\n`;
-                currentShip.setAttribute('src', 'imgs/alien-damage.png');
+                defendant.hull -= this.firepower;
+                console.log(`${defendant.ship} has been hit! ${defendant.ship} hull strength is at ${defendant.hull}`);
+                messageEl.innerHTML += `${defendant.ship} has been hit! ${defendant.ship} hull strength is at ${defendant.hull}\r\n\n`;
+
+                if (defendant.ship === 'Alien') {
+                    currentShip.setAttribute('src', 'imgs/alien-damage.png');
+                }
                 // console.log("Before: " + defendant.hull);
                 defendant.hull -= this.firepower;
                 // console.log("After: " + defendant.hull);
@@ -50,8 +61,8 @@ class Ship {
 
             // console.log(this.hull + ":" + defendant.hull);
 
-            document.getElementById('human-status-el').textContent = `Ships: ${humanShips} | ${human.ship} Hull: ${human.hull}`;
-            document.getElementById('alien-status-el').textContent = `Ships: ${alienShips} | ${alien.ship} Hull: ${alien.hull}`;
+            document.getElementById('human-status-el').textContent = `Ships: ${human.numShips} | ${human.ship} Hull: ${human.hull}`;
+            document.getElementById('alien-status-el').textContent = `Ships: ${alien.numShips} | ${alien.ship} Hull: ${alien.hull}`;
 
             if (defendant.hull <= 0) {
                 // console.log(`The ${this.ship} has destroyed the ${defendant.ship} ship - ${this.ship} Hull: ${this.hull} - ${defendant.ship} Hull: ${defendant.hull}`);
@@ -62,13 +73,13 @@ class Ship {
                     document.body.style.backgroundImage = "url('imgs/explosion.png')";
                 }
                 
-                messageEl.innerHTML += `The ${defendant.ship} was destroyed! Would you like to Continue or Retreat?\r\n\n`;
-                alienShips--;
                 console.log(`The ${defendant.ship} ship has been destroyed! Would you like to Continue or Retreat?`);
+                messageEl.innerHTML += `The ${defendant.ship} was destroyed! Would you like to Continue or Retreat?\r\n\n`;
+                defendant.numShips--;
                 
-                // document.getElementById('retreat').style.visibility = 'visible';
             } else {
                 console.log(`The ${defendant.ship} has endured damage. Hull strength is at ${defendant.hull}`);
+                messageEl.innerHTML += `The ${defendant.ship} has endured damage. Hull strength is at ${defendant.hull}\r\n\n`;
                 // this.attack(defendant);
             }
     }
@@ -110,8 +121,10 @@ class Ship {
 // let alienShips = numShips;
 // let humanShips = numShips;
 
-let alienShips = 6;
-let humanShips = 6;
+// let alienShips = 6;
+// let humanShips = 6;
+let numShips = 6;
+
 let direction = 'left';
 
 // find a random number between 6 and 3
@@ -123,9 +136,9 @@ let firepower = Math.floor(Math.random()*(4-2) + 2) + 1;
 // find a random number between .8 and .6
 let attack = Math.random()*(.8-.6) + .6;
 
-const alien = new Ship('Alien', hull, firepower, attack);
+const alien = new Ship('Alien', hull, firepower, attack, numShips);
 
-const human = new Ship('USS Assembly', 20, 5, .7);
+const human = new Ship('USS Assembly', 20, 5, .7, 1);
 
 // console.log(human);
 console.log(`${human.ship} - Hull: ${human.hull}, Firepower: ${human.firepower}, Acurracy: ${human.accuracy}`);
@@ -133,8 +146,8 @@ console.log(`${human.ship} - Hull: ${human.hull}, Firepower: ${human.firepower},
 // console.log(alien);
 console.log(`${alien.ship} - Hull: ${alien.hull}, Firepower: ${alien.firepower}, Acurracy: ${alien.accuracy}`);
 
-document.getElementById('human-status-el').textContent = `Ships: ${humanShips} | ${human.ship} Hull: ${human.hull}`;
-document.getElementById('alien-status-el').textContent = `Ships: ${alienShips} | ${alien.ship} Hull: ${alien.hull}`;
+document.getElementById('human-status-el').textContent = `Ships: ${human.numShips} | ${human.ship} Hull: ${human.hull}`;
+document.getElementById('alien-status-el').textContent = `Ships: ${alien.numShips} | ${alien.ship} Hull: ${alien.hull}`;
 
 console.log(`${human.ship} initiates a FIRST STRIKE response and launches an attack on the ${alien.ship}`);
 console.log(`**** NEWS ALERT *****\nThe humans all around the world are being drained of our natural resources, our RAMEN!\n${human.ship} initiates a FIRST STRIKE response and launches an attack on the ${alien.ship} ship\r\n\n`);
@@ -151,8 +164,8 @@ document.addEventListener('click', (e) => {
         case 'Attack':
             // console.log("Attack Button")
             // human.deploy(human);
-            // human.attack(alien);
-            alien.attack(human);
+            human.attack(alien);
+            // alien.attack(human);
             break;
         case 'Retreat':
             // console.log("Retreat Button")

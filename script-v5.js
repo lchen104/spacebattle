@@ -19,7 +19,9 @@ class Ship {
             if (Math.random() < this.accuracy) {
                 console.log(`${defendant.ship} has been hit!`);
                 messageEl.innerHTML += `${defendant.ship} has been hit!\r\n\n`;
-                currentShip.setAttribute('src', 'imgs/alien-damage.png');
+                if (defendant.ship === 'Alien') {
+                    currentShip.setAttribute('src', 'imgs/alien-damage.png');
+                }
                 // console.log("Before: " + defendant.hull);
                 defendant.hull -= this.firepower;
                 // console.log("After: " + defendant.hull);
@@ -62,13 +64,13 @@ class Ship {
                     document.body.style.backgroundImage = "url('imgs/explosion.png')";
                 }
                 
+                console.log(`The ${defendant.ship} ship has been destroyed! Would you like to Continue or Retreat?`);
                 messageEl.innerHTML += `The ${defendant.ship} was destroyed! Would you like to Continue or Retreat?\r\n\n`;
                 alienShips--;
-                console.log(`The ${defendant.ship} ship has been destroyed! Would you like to Continue or Retreat?`);
                 
-                // document.getElementById('retreat').style.visibility = 'visible';
             } else {
                 console.log(`The ${defendant.ship} has endured damage. Hull strength is at ${defendant.hull}`);
+                messageEl.innerHTML += `The ${defendant.ship} has endured damage. Hull strength is at ${defendant.hull}\r\n\n`;
                 // this.attack(defendant);
             }
     }
@@ -151,8 +153,8 @@ document.addEventListener('click', (e) => {
         case 'Attack':
             // console.log("Attack Button")
             // human.deploy(human);
-            // human.attack(alien);
-            alien.attack(human);
+            human.attack(alien);
+            // alien.attack(human);
             break;
         case 'Retreat':
             // console.log("Retreat Button")

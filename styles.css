@@ -74,9 +74,11 @@ aside {
 #console {
     background: white;
     position: relative;
-    border-radius: 10px;
+    border-radius: 2px;
     border: 2px solid black;
     width: 300px;
+    height: 550px;
+    overflow-y: auto;
 }
 
 #btn {
@@ -86,3 +88,5 @@ aside {
 #img-console {
     width: 250px;
 }
+
+

@@ -13,7 +13,7 @@ class Ship {
             console.log(this);
             console.log(defendant);
             // console.log("Ship: " + human.ship + " Hull: " + human.hull + " | " + defendant.ship + " Hull: " + defendant.hull);
-            console.log(`${this.ship} shots at the ${defendant.ship}`);
+            console.log(`${this.ship} takes a shot at the ${defendant.ship}`);
             messageEl.innerHTML += `${this.ship} takes a shot at the ${defendant.ship}\r\n\n`;
 
             let currentShip = document.getElementById('alien-img');
@@ -23,22 +23,23 @@ class Ship {
                 // console.log("After: " + defendant.hull);
 
                 if (defendant.hull <= 0) {
+                    messageEl.innerHTML += `The ${defendant.ship} was destroyed!\r\n\n`;
                     // console.log(`The ${this.ship} has destroyed the ${defendant.ship} ship - ${this.ship} Hull: ${this.hull} - ${defendant.ship} Hull: ${defendant.hull}`);
                     if (defendant.ship === 'Alien') {
                         alienShips--;
                         document.getElementById('alien-img').setAttribute('src', 'imgs/explosion.png');
+                        console.log(`The ${defendant.ship} ship has been destroyed! Would you like to Continue or Retreat?`);
+                        messageEl.innerHTML += `<button onclick='deploy()'>Continue</button> or <button>Retreat</button>\r\n\n`;
+                        // alien.deploy();
                     } else {
                         humanShips--;
                         // document.getElementById('human-img').setAttribute('src', 'imgs/explosion.png');
                         document.body.style.backgroundImage = "url('imgs/explosion.png')";
+                        document.getElementById('.btn').innerHTML = `<button id="reset">Reset</button>`;
                     }
                     
-                    console.log(`The ${defendant.ship} ship has been destroyed! Would you like to Continue or Retreat?`);
-                    messageEl.innerHTML += `The ${defendant.ship} was destroyed! Would you like to Continue or Retreat?\r\n\n`;
+                    
 
-                    // if (defendant.ship === 'Alien') {
-                    //     alien.deploy();
-                    // }
                 } else {
                     console.log(`The ${defendant.ship} has endured damage. Hull strength is at ${defendant.hull}`);
                     messageEl.innerHTML += `The ${defendant.ship} has endured damage. Hull strength is at ${defendant.hull}\r\n\n`;
@@ -81,23 +82,43 @@ class Ship {
     }
 
     retreat() {
-        console.log('Im getting outta here!')
+        console.log("I'm OUTTA HERE!")
         messageEl.textContent += "I'm OUTTA HERE!\r\n\n";
     }
 
     deploy() {
+        
+        if (alienShips > 0) {
+            console.log(`The Aliens launches a new ship!`);
+            messageEl.innerHTML += `The Aliens launches a new ship!\r\n\n`;
+            direction = 'left';
 
-        // find a random number between 6 and 3
-        let hull = Math.floor(Math.random()*(6-3)+3) + 1;
+            // find a random number between 6 and 3
+            hull = Math.floor(Math.random()*(6-3)+3) + 1;
 
-        // find a random number bewteen 4 and 2
-        let firepower = Math.floor(Math.random()*(4-2) + 2) + 1;
+            // find a random number bewteen 4 and 2
+            firepower = Math.floor(Math.random()*(4-2) + 2) + 1;
 
-        // find a random number between .8 and .6
-        let attack = Math.random()*(.8-.6) + .6;
+            // find a random number between .8 and .6
+            attack = Math.random()*(.8-.6) + .6;
 
-        const alien = new Ship('Alien', hull, firepower, attack, numShips);
-        // alien.numShips--;
+            alien = new Ship('Alien', hull, firepower, attack);
+
+            // console.log(human);
+            console.log(`${human.ship} - Hull: ${human.hull}, Firepower: ${human.firepower}, Acurracy: ${human.accuracy}`);
+
+            // console.log(alien);
+            console.log(`${alien.ship} - Hull: ${alien.hull}, Firepower: ${alien.firepower}, Acurracy: ${alien.accuracy}`);
+
+            document.getElementById('human-status-el').textContent = `Ships: ${humanShips} | ${human.ship} Hull: ${human.hull}`;
+            document.getElementById('alien-status-el').textContent = `Ships: ${alienShips} | ${alien.ship} Hull: ${alien.hull}`;
+
+            // alienShips--;
+            human.attack(alien);
+        } else {
+            console.log(`GAME OVER! The rest of the aliens are retreating!`);
+            messageEl.innerHTML += `GAME OVER! The rest of the aliens are retreating!\r\n\n`;
+        }
 
     }
     
@@ -122,9 +143,9 @@ let firepower = Math.floor(Math.random()*(4-2) + 2) + 1;
 // find a random number between .8 and .6
 let attack = Math.random()*(.8-.6) + .6;
 
-const alien = new Ship('Alien', hull, firepower, attack, alienShips);
+let alien = new Ship('Alien', hull, firepower, attack);
 
-const human = new Ship('USS Assembly', 20, 5, .7, humanShips);
+const human = new Ship('USS Assembly', 20, 5, .7);
 
 // console.log(human);
 console.log(`${human.ship} - Hull: ${human.hull}, Firepower: ${human.firepower}, Acurracy: ${human.accuracy}`);
@@ -161,6 +182,9 @@ document.addEventListener('click', (e) => {
             break;    
         case 'Reset':
             window.location.reload();
+            break;
+        case 'Continue':
+            alien.deploy();
             break;
     }
 });

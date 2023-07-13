@@ -75,8 +75,8 @@ class Ship {
 
             console.log(this.hull + ":" + defendant.hull);
 
-            document.getElementById('human-status-el').textContent = `Ships: ${human.numShips} | ${human.ship} Hull: ${human.hull}`;
-            document.getElementById('alien-status-el').textContent = `Ships: ${alien.numShips} | ${alien.ship} Hull: ${alien.hull}`;
+            document.getElementById('human-status-el').textContent = `Ships: ${humanShips} | ${human.ship} Hull: ${human.hull}`;
+            document.getElementById('alien-status-el').textContent = `Ships: ${alienShips} | ${alien.ship} Hull: ${alien.hull}`;
 
     }
 

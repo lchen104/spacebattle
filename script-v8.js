@@ -149,7 +149,9 @@ document.addEventListener('click', (e) => {
             // console.log("Attack Button")
             // human.deploy(human);
             human.attack(alien);
-            // alien.attack(human);
+            if (numShips > 0) {
+                alien.attack(human);
+            }
             break;
         case 'Retreat':
             // console.log("Retreat Button")

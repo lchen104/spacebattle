@@ -62,7 +62,8 @@ button:hover {
 }
 
 aside {
-    background: white;
+    background: black;
+    color: green;
     position: absolute;
     border-radius: 10px;
     width: 300px;
@@ -73,8 +74,9 @@ aside {
 
 #console {
     background: white;
+    color: black;
     position: relative;
-    border-radius: 2px;
+    border-radius: 10px;
     border: 2px solid black;
     width: 300px;
     height: 550px;

@@ -29,7 +29,19 @@ class Ship {
                         alienShips--;
                         document.getElementById('alien-img').setAttribute('src', 'imgs/explosion.png');
                         console.log(`The ${defendant.ship} ship has been destroyed! Would you like to Continue or Retreat?`);
+                        messageEl.innerHTML += `The ${defendant.ship} ship has been destroyed! Would you like to Continue or Retreat?\r\n\n`;
                         messageEl.innerHTML += `<button onclick='deploy()'>Continue</button> or <button>Retreat</button>\r\n\n`;
+
+                        // // Create a new Button element
+                        // let btnEl = document.querySelector('.btn');
+                        // let continueBtn = document.createElement('button');
+                        // continueBtn.setAttribute('id', 'continue');
+                        // continueBtn.innerHTML = 'Continue';
+                        // console.log(continueBtn)
+                        // btnEl.innerHTML = "";
+                        // btnEl.appendChild(continueBtn);
+                        // console.log(btnEl);
+
                         // alien.deploy();
                     } else {
                         humanShips--;
@@ -82,11 +94,13 @@ class Ship {
     }
 
     retreat() {
-        console.log("I'm OUTTA HERE!")
-        messageEl.textContent += "I'm OUTTA HERE!\r\n\n";
+        console.log(`I'm OUTTA HERE!`)
+        messageEl.innerHTML += `I'm OUTTA HERE!\r\n\n`;
     }
 
     deploy() {
+        // document.removeChild(continueBtn);
+        let currentShip = document.getElementById('alien-img');
         
         if (alienShips > 0) {
             console.log(`The Aliens launches a new ship!`);
@@ -156,7 +170,7 @@ console.log(`${alien.ship} - Hull: ${alien.hull}, Firepower: ${alien.firepower},
 document.getElementById('human-status-el').textContent = `Ships: ${humanShips} | ${human.ship} Hull: ${human.hull}`;
 document.getElementById('alien-status-el').textContent = `Ships: ${alienShips} | ${alien.ship} Hull: ${alien.hull}`;
 
-console.log(`${human.ship} initiates a FIRST STRIKE response and launches an attack on the ${alien.ship}`);
+// console.log(`${human.ship} initiates a FIRST STRIKE response and launches an attack on the ${alien.ship}`);
 console.log(`**** NEWS ALERT *****\nThe humans all around the world are being drained of our natural resources, our RAMEN!\n${human.ship} initiates a FIRST STRIKE response and launches an attack on the ${alien.ship} ship\r\n\n`);
 
 let messageEl = document.getElementById('message-el');

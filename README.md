@@ -30,5 +30,5 @@ There are six alien ships. The aliens' weakness is that they are too logical and
 - Javascript
 
 # Future Enhancements
-Add Alien beaming up Ramen at intro
-Add Star Wars intro scroll at startup
+- Add Alien beaming up Ramen at intro
+- Add Star Wars intro scroll at startup

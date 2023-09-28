@@ -15,7 +15,7 @@ There are six alien ships. The aliens' weakness is that they are too logical and
 # Screenshot 3
 ![3](imgs/thumb3.png)
 
-# Screenshot 14
+# Screenshot 4
 ![4](imgs/thumb4.png)
 
 # Screenshot 5
